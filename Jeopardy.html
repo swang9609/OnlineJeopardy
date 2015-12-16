@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style>
+        button.btn-question {
+            width: 110px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        p.category{
+            margin: 10px;
+        }
+    </style>
+    <script>
+        //todo: add category
+        //todo: display countdown timer
+        //todo: 
+        var questionId;
+        $(document).ready(function () {
+            $("button.btn-question").click(function () {
+                //alert($("#currentQuestionId").text());
+                questionId = this.id;
+                $("#currentQuestionId").text(questionId);
+                $("#popupQuestion").modal({ backdrop: "static" });
+                var myCounter = new Countdown({
+                    seconds: 15,  // number of seconds to count down
+                    onUpdateStatus: function (sec) { console.log(sec); }, // callback for each second
+                    onCounterEnd: function () { alert('counter ended!'); } // final action
+                });
+
+                myCounter.start();
+            });
+        });
+
+        // countdown timer
+        function Countdown(options) {
+            var timer,
+            instance = this,
+            seconds = options.seconds || 10,
+            updateStatus = options.onUpdateStatus || function () { },
+            counterEnd = options.onCounterEnd || function () { };
+
+            function decrementCounter() {
+                updateStatus(seconds);
+                if (seconds === 0) {
+                    counterEnd();
+                    instance.stop();
+                }
+                seconds--;
+            }
+
+            this.start = function () {
+                clearInterval(timer);
+                timer = 0;
+                seconds = options.seconds;
+                timer = setInterval(decrementCounter, 1000);
+            };
+
+            this.stop = function () {
+                clearInterval(timer);
+            };
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <h1>Jeopardy</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><p class="category">OOP</p></th>
+                    <th><p class="category">Framework</p></th>
+                    <th><p class="category">Design Pattern</p></th>
+                    <th><p class="category">Syntax</p></th>
+                    <th><p class="category">New Features</p></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question" id="1-1">5</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">5</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">5</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">5</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">5</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question" id="1-2">10</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">10</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">10</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">10</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">10</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">20</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">20</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">20</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">20</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">20</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">30</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">30</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">30</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">30</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">30</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">40</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">40</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">40</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">40</button></td>
+                    <td><button type="button" class="btn btn-primary btn-lg btn-question">40</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="row" style="display:none;" >
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary btn-lg btn-question" id="1-1">5</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question" id="1-2">10</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">20</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">30</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">40</button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary btn-lg btn-question">5</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">10</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">20</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">30</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">40</button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary btn-lg btn-question">5</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">10</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">20</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">30</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">40</button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary btn-lg btn-question">5</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">10</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">20</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">30</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">40</button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary btn-lg btn-question">5</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">10</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">20</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">30</button>
+                <button type="button" class="btn btn-primary btn-lg btn-question">40</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="popupQuestion" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h2 class="modal-title">Question for 5 Points <span id="currentQuestionId">?</span></h2>
+                    </div>
+                    <div class="modal-body">
+                        <h3>What kind of animal are you?</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
